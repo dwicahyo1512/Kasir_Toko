@@ -10,11 +10,18 @@ using System.Windows.Forms;
 
 namespace Kasir_Toko
 {
-    public partial class Form1 : Form
+    public partial class Kasir : Form
     {
-        public Form1()
+        public Kasir()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            login frm1 = new login();
+            frm1.ShowDialog();
         }
     }
 }
