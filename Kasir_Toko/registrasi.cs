@@ -66,7 +66,7 @@ namespace Kasir_Toko
                 if (!(userExists || mailExists))
                 {
 
-                    string iquery = "INSERT INTO Kasir_Toko.kasir(`kasir_id`,`kasir_nama`,`tgl_lahir`,`email`,`telepon`, `password`) VALUES (NULL, '" + nama_registrasi.Text + "','" + dateTimePicker1.Value.Date + "', '" + email_registrasi.Text + "','" + telepon_registrasi.Text + "','" + password_registrasi.Text + "')";
+                    string iquery = "INSERT INTO Kasir_Toko.kasir(`kasir_id`,`kasir_nama`,`tgl_lahir`,`email`,`telepon`, `password`) VALUES (NULL, '" + nama_registrasi.Text + "','" + dateTimePicker1.Value.ToString("yyyy/MM/dd") + "', '" + email_registrasi.Text + "','" + telepon_registrasi.Text + "','" + password_registrasi.Text + "')";
                     MySqlCommand commandDatabase = new MySqlCommand(iquery, connection);
                     commandDatabase.CommandTimeout = 60;
 

@@ -30,13 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(login));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.create_new_kasir = new System.Windows.Forms.Button();
+            this.login_button = new System.Windows.Forms.Button();
             this.password_login = new System.Windows.Forms.TextBox();
             this.nama_login = new System.Windows.Forms.TextBox();
             this.password_nama = new System.Windows.Forms.Label();
             this.nama_label_login = new System.Windows.Forms.Label();
             this.login_label = new System.Windows.Forms.Label();
-            this.login_button = new System.Windows.Forms.Button();
-            this.create_new_kasir = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -62,13 +62,37 @@
             this.panel1.Size = new System.Drawing.Size(380, 472);
             this.panel1.TabIndex = 0;
             // 
+            // create_new_kasir
+            // 
+            this.create_new_kasir.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.create_new_kasir.Location = new System.Drawing.Point(191, 349);
+            this.create_new_kasir.Name = "create_new_kasir";
+            this.create_new_kasir.Size = new System.Drawing.Size(106, 42);
+            this.create_new_kasir.TabIndex = 7;
+            this.create_new_kasir.Text = "register";
+            this.create_new_kasir.UseVisualStyleBackColor = true;
+            this.create_new_kasir.Click += new System.EventHandler(this.create_new_kasir_Click);
+            // 
+            // login_button
+            // 
+            this.login_button.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.login_button.Location = new System.Drawing.Point(61, 349);
+            this.login_button.Name = "login_button";
+            this.login_button.Size = new System.Drawing.Size(106, 42);
+            this.login_button.TabIndex = 6;
+            this.login_button.Text = "LOGIN";
+            this.login_button.UseVisualStyleBackColor = true;
+            this.login_button.Click += new System.EventHandler(this.login_button_Click);
+            // 
             // password_login
             // 
             this.password_login.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(174)))), ((int)(((byte)(248)))));
             this.password_login.Location = new System.Drawing.Point(61, 280);
             this.password_login.Name = "password_login";
+            this.password_login.PasswordChar = '*';
             this.password_login.Size = new System.Drawing.Size(274, 42);
             this.password_login.TabIndex = 4;
+            this.password_login.UseSystemPasswordChar = true;
             // 
             // nama_login
             // 
@@ -77,6 +101,7 @@
             this.nama_login.Name = "nama_login";
             this.nama_login.Size = new System.Drawing.Size(274, 42);
             this.nama_login.TabIndex = 3;
+            this.nama_login.UseWaitCursor = true;
             // 
             // password_nama
             // 
@@ -116,34 +141,12 @@
             this.login_label.TabIndex = 0;
             this.login_label.Text = "Login";
             // 
-            // login_button
-            // 
-            this.login_button.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.login_button.Location = new System.Drawing.Point(61, 349);
-            this.login_button.Name = "login_button";
-            this.login_button.Size = new System.Drawing.Size(106, 42);
-            this.login_button.TabIndex = 6;
-            this.login_button.Text = "LOGIN";
-            this.login_button.UseVisualStyleBackColor = true;
-            this.login_button.Click += new System.EventHandler(this.login_button_Click);
-            // 
-            // create_new_kasir
-            // 
-            this.create_new_kasir.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.create_new_kasir.Location = new System.Drawing.Point(191, 349);
-            this.create_new_kasir.Name = "create_new_kasir";
-            this.create_new_kasir.Size = new System.Drawing.Size(106, 42);
-            this.create_new_kasir.TabIndex = 7;
-            this.create_new_kasir.Text = "register";
-            this.create_new_kasir.UseVisualStyleBackColor = true;
-            this.create_new_kasir.Click += new System.EventHandler(this.create_new_kasir_Click);
-            // 
             // dateTimePicker1
             // 
             this.dateTimePicker1.CalendarFont = new System.Drawing.Font("Times New Roman", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker1.CalendarForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.dateTimePicker1.CalendarTitleForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dateTimePicker1.CustomFormat = "YYYY-MM-DD HH:MM:SS";
+            this.dateTimePicker1.CustomFormat = "YYYY-MM-DD";
             this.dateTimePicker1.Enabled = false;
             this.dateTimePicker1.Location = new System.Drawing.Point(6, 16);
             this.dateTimePicker1.Name = "dateTimePicker1";
