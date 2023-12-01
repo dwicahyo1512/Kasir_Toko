@@ -131,11 +131,11 @@ namespace Kasir_Toko.panel_informasi
         {
             dataGridView1.Rows.Clear();
             conn.Open();
-            cmd = new MySqlCommand("SELECT satuan_id, satuan_nama, satuan_ket FROM satuan WHERE satuan_nama like '%" + satuan_nama.Text +  "%' or satuan_keterangan like '%" + satuan_keterangan.Text + "%' ", conn);
+            cmd = new MySqlCommand("SELECT satuan_id, satuan_nama, satuan_ket FROM satuan WHERE  satuan_id like '%" + Search_tabel.Text +  "%' or satuan_nama like '%" + Search_tabel.Text +  "%' or satuan_ket like '%" + Search_tabel.Text + "%' ", conn);
             dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                dataGridView1.Rows.Add(dataGridView1.Rows.Count + 1, dr["satuan_nama"].ToString(), dr["satuan_ket"].ToString());
+                dataGridView1.Rows.Add(dataGridView1.Rows.Count + 1, dr["satuan_id"].ToString(), dr["satuan_nama"].ToString(), dr["satuan_ket"].ToString());
             }
             dr.Close();
             conn.Close();
