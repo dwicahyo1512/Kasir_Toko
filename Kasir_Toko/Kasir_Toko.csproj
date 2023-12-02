@@ -123,6 +123,14 @@
     <Compile Include="login.Designer.cs">
       <DependentUpon>login.cs</DependentUpon>
     </Compile>
+    <Compile Include="panel_informasi\barang.cs" />
+    <Compile Include="panel_informasi\DbBarang.cs" />
+    <Compile Include="panel_informasi\form\form_barang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="panel_informasi\form\form_barang.Designer.cs">
+      <DependentUpon>form_barang.cs</DependentUpon>
+    </Compile>
     <Compile Include="panel_informasi\panel_barang.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -166,6 +174,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="login.resx">
       <DependentUpon>login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="panel_informasi\form\form_barang.resx">
+      <DependentUpon>form_barang.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="panel_informasi\panel_akun_kasir.resx">
       <DependentUpon>panel_akun_kasir.cs</DependentUpon>
