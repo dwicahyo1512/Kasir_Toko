@@ -13,7 +13,7 @@ namespace Kasir_Toko.panel_informasi.form
     public partial class form_barang : Form
     {
         private readonly panel_barang _parent;
-        public string id_barang, satuan, kategori;
+        public string id,nama,stok,harga,keterangan, satuan, kategori;
         public form_barang(panel_barang parent)
         {
             InitializeComponent();
@@ -22,14 +22,28 @@ namespace Kasir_Toko.panel_informasi.form
 
         private void clear_button_Click(object sender, EventArgs e)
         {
-
+            Clear();
         }
         private void form_barang_Load(object sender, EventArgs e)
         {
             DbBarang.LoadComboBox("SELECT * FROM satuan", "satuan", "satuan_nama", combo_satuan);
-            DbBarang.LoadComboBox("SELECT * FROM kategori", "satuan", "kategori_nama", combo_kategori);
+            DbBarang.LoadComboBox("SELECT * FROM kategori", "kategori", "kategori_nama", combo_kategori);
             combo_satuan.Text = satuan;
             combo_kategori.Text = kategori;
+        }
+        public void UpdateInfo(){
+            btnsave.Text = "Update";
+            nama_barang.Text = nama;
+            harga_barang.Text = harga;
+            stok_barang.Text = stok;
+            keterangan_barang.Text = keterangan;
+            combo_satuan.Text = satuan;
+            combo_kategori.Text = kategori;
+        }
+
+        public void SaveInfo()
+        {
+            btnsave.Text = "Save";
         }
         public void Clear()
         {
@@ -59,6 +73,11 @@ namespace Kasir_Toko.panel_informasi.form
                 barang std = new barang(combo_satuan.Text.Trim(),combo_kategori.Text.Trim(),nama_barang.Text.Trim(),harga_barang.Text.Trim(), stok_barang.Text.Trim(),keterangan_barang.Text.Trim());
                DbBarang.AddBarang(std);
                 Clear();
+            }
+            if(btnsave.Text == "Update")
+            {
+                barang std = new barang(combo_satuan.Text.Trim(), combo_kategori.Text.Trim(), nama_barang.Text.Trim(), harga_barang.Text.Trim(), stok_barang.Text.Trim(), keterangan_barang.Text.Trim());
+                DbBarang.UpdateBarang(std, id);
             }
             _parent.Display();
         }

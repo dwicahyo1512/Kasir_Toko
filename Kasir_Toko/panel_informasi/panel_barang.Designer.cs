@@ -69,6 +69,7 @@
             this.Search_tabel.Name = "Search_tabel";
             this.Search_tabel.Size = new System.Drawing.Size(258, 22);
             this.Search_tabel.TabIndex = 24;
+            this.Search_tabel.TextChanged += new System.EventHandler(this.Search_tabel_TextChanged);
             // 
             // search_label
             // 
@@ -117,6 +118,7 @@
             this.dataGridView.ShowEditingIcon = false;
             this.dataGridView.Size = new System.Drawing.Size(752, 342);
             this.dataGridView.TabIndex = 21;
+            this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick);
             // 
             // label3
             // 
@@ -144,14 +146,17 @@
             // 
             // Column1
             // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Column1.DataPropertyName = "barang_id";
             this.Column1.HeaderText = "#";
             this.Column1.MinimumWidth = 6;
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
-            this.Column1.Width = 125;
+            this.Column1.Width = 43;
             // 
             // Column2
             // 
+            this.Column2.DataPropertyName = "satuan_nama";
             this.Column2.HeaderText = "Satuan";
             this.Column2.MinimumWidth = 6;
             this.Column2.Name = "Column2";
@@ -160,6 +165,7 @@
             // 
             // Column3
             // 
+            this.Column3.DataPropertyName = "kategori_nama";
             this.Column3.HeaderText = "Kategori";
             this.Column3.MinimumWidth = 6;
             this.Column3.Name = "Column3";
@@ -168,6 +174,7 @@
             // 
             // Column4
             // 
+            this.Column4.DataPropertyName = "barang_nama";
             this.Column4.HeaderText = "Nama Barang";
             this.Column4.MinimumWidth = 6;
             this.Column4.Name = "Column4";
@@ -176,6 +183,7 @@
             // 
             // Column5
             // 
+            this.Column5.DataPropertyName = "harga_barang";
             this.Column5.HeaderText = "Harga Barang";
             this.Column5.MinimumWidth = 6;
             this.Column5.Name = "Column5";
@@ -184,6 +192,7 @@
             // 
             // Column6
             // 
+            this.Column6.DataPropertyName = "stok_barang";
             this.Column6.HeaderText = "Stok Barang";
             this.Column6.MinimumWidth = 6;
             this.Column6.Name = "Column6";
@@ -192,6 +201,7 @@
             // 
             // Column7
             // 
+            this.Column7.DataPropertyName = "barang_ket";
             this.Column7.HeaderText = "Barang Keterangan";
             this.Column7.MinimumWidth = 6;
             this.Column7.Name = "Column7";
@@ -211,6 +221,7 @@
             this.Column8.Name = "Column8";
             this.Column8.ReadOnly = true;
             this.Column8.Text = "Update";
+            this.Column8.UseColumnTextForButtonValue = true;
             this.Column8.Width = 125;
             // 
             // Column9
@@ -226,6 +237,7 @@
             this.Column9.Name = "Column9";
             this.Column9.ReadOnly = true;
             this.Column9.Text = "Delete";
+            this.Column9.UseColumnTextForButtonValue = true;
             this.Column9.Width = 125;
             // 
             // panel_barang

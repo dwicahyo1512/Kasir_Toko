@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Kasir_Toko.panel_informasi;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,9 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Kasir_Toko.panel_informasi
+namespace akun_Toko.panel_informasi
 {
-    internal class DbBarang
+    internal class DbDataAkun
     {
         public static MySqlConnection GetConnection()
         {
@@ -27,18 +28,17 @@ namespace Kasir_Toko.panel_informasi
             return conn;
         }
 
-        public static void AddBarang(barang std)
+        public static void AddAkun(akun std)
         {
-            string sql = "INSERT INTO barang VALUES (NULL, @barang_nama, @stok_barang, @harga_barang, @barang_ket, @satuan_nama, @kategori_nama, null)";
+            string sql = "INSERT INTO kasir VALUES (null,@akun_nama, @password, @email, @telepon, @tgl_lahir, null)";
             MySqlConnection conn = GetConnection();
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             cmd.CommandType = CommandType.Text;
-            cmd.Parameters.Add("@satuan_nama", MySqlDbType.VarChar).Value = std.satuan;
-            cmd.Parameters.Add("@kategori_nama", MySqlDbType.VarChar).Value = std.kategori;
-            cmd.Parameters.Add("@barang_nama", MySqlDbType.VarChar).Value = std.barang_nama;
-            cmd.Parameters.Add("@harga_barang", MySqlDbType.VarChar).Value = std.harga_barang;
-            cmd.Parameters.Add("@stok_barang", MySqlDbType.VarChar).Value = std.stok_barang;
-            cmd.Parameters.Add("@barang_ket", MySqlDbType.VarChar).Value = std.barang_keterangan;
+            cmd.Parameters.Add("@akun_nama", MySqlDbType.VarChar).Value = std.kasir_nama;
+            cmd.Parameters.Add("@password", MySqlDbType.VarChar).Value = std.password;
+            cmd.Parameters.Add("@email", MySqlDbType.VarChar).Value = std.email;
+            cmd.Parameters.Add("@telepon", MySqlDbType.VarChar).Value = std.telepon;
+            cmd.Parameters.Add("@tgl_lahir", MySqlDbType.VarChar).Value = std.tgl_lahir;
             try
             {
                 cmd.ExecuteNonQuery();
@@ -46,23 +46,22 @@ namespace Kasir_Toko.panel_informasi
             }
             catch(MySqlException ex)
             {
-                MessageBox.Show("Barang tidak Dimasukkan \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("akun tidak Dimasukkan \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             conn.Close();
         }
-        public static void UpdateBarang(barang std,string id)
+        public static void UpdateAkun(akun std,string id)
         {
-            string sql = "UPDATE barang SET barang_nama=@barang_nama, stok_barang=@stok_barang, harga_barang=@harga_barang, barang_ket=@barang_ket, satuan_nama=@satuan_nama, kategori_nama=@kategori_nama WHERE barang_id = @barang_id";
+            string sql = "UPDATE kasir SET kasir_nama=@nama, password=@password, email=@email, telepon=@telepon, tgl_lahir=@tgl_lahir WHERE kasir_id=@kasir_id";
             MySqlConnection conn = GetConnection();
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             cmd.CommandType = CommandType.Text;
-            cmd.Parameters.Add("@barang_id", MySqlDbType.VarChar).Value = id;
-            cmd.Parameters.Add("@barang_nama", MySqlDbType.VarChar).Value = std.barang_nama;
-            cmd.Parameters.Add("@stok_barang", MySqlDbType.VarChar).Value = std.stok_barang;
-            cmd.Parameters.Add("@harga_barang", MySqlDbType.VarChar).Value = std.harga_barang;
-            cmd.Parameters.Add("@barang_ket", MySqlDbType.VarChar).Value = std.barang_keterangan;
-            cmd.Parameters.Add("@satuan_nama", MySqlDbType.VarChar).Value = std.satuan;
-            cmd.Parameters.Add("@kategori_nama", MySqlDbType.VarChar).Value = std.kategori;
+            cmd.Parameters.Add("@kasir_id", MySqlDbType.VarChar).Value = id;
+            cmd.Parameters.Add("@nama", MySqlDbType.VarChar).Value = std.kasir_nama;
+            cmd.Parameters.Add("@password", MySqlDbType.VarChar).Value = std.password;
+            cmd.Parameters.Add("@email", MySqlDbType.VarChar).Value = std.email;
+            cmd.Parameters.Add("@telepon", MySqlDbType.VarChar).Value = std.telepon;
+            cmd.Parameters.Add("@tgl_lahir", MySqlDbType.VarChar).Value = std.tgl_lahir;
             try
             {
                 cmd.ExecuteNonQuery();
@@ -74,13 +73,13 @@ namespace Kasir_Toko.panel_informasi
             }
             conn.Close();
         }
-        public static void DeleteBarang(string id)
+        public static void DeletekAkun(string id)
         {
-            string sql = "DELETE FROM barang WHERE barang_id = @barang_id";
+            string sql = "DELETE FROM kasir WHERE kasir_id = @kasir_id";
             MySqlConnection conn = GetConnection();
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             cmd.CommandType = CommandType.Text;
-            cmd.Parameters.Add("@barang_id", MySqlDbType.VarChar).Value = id;
+            cmd.Parameters.Add("@kasir_id", MySqlDbType.VarChar).Value = id;
             try
             {
                 cmd.ExecuteNonQuery();
