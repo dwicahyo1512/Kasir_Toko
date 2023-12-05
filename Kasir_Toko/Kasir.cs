@@ -64,5 +64,10 @@ namespace Kasir_Toko
         {
             loadform(new panel_akun_kasir());
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            loadform(new panel_history());
+        }
     }
 }

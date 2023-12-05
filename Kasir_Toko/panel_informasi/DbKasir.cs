@@ -115,6 +115,25 @@ namespace Kasir_Toko.panel_informasi
 
         }
 
+        public static void DeleteHistory(string id)
+        {
+            string sql = "DELETE FROM total_transaksi WHERE total_transaksi_id=@transaksi_total";
+            MySqlConnection conn = GetConnection();
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.Add("@transaksi_total", MySqlDbType.VarChar).Value = id;
+            try
+            {
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Berhasil menghapus data", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Gagal menghapus data! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            conn.Close();
+        }
+
         public static void DisplayAndSearch(string query, DataGridView dgv)
         {
             string sql = query;

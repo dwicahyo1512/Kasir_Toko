@@ -40,6 +40,7 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.mainpanel = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -54,6 +55,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.kasir_count);
             this.panel1.Controls.Add(this.barang);
             this.panel1.Controls.Add(this.kategori);
@@ -154,6 +156,16 @@
             this.mainpanel.TabIndex = 3;
             this.mainpanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(22, 503);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(143, 67);
+            this.button3.TabIndex = 5;
+            this.button3.Text = "history transaksi";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Kasir
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -189,5 +201,6 @@
         private System.Windows.Forms.Button Satuan;
         private System.Windows.Forms.Button kasir_count;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button3;
     }
 }

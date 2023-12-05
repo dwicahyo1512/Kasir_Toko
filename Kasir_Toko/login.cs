@@ -78,5 +78,10 @@ namespace Kasir_Toko
             registrasi frm3 = new registrasi();
             frm3.ShowDialog();
         }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            dateTimePicker1.Value = DateTime.Now;
+        }
     }
 }
