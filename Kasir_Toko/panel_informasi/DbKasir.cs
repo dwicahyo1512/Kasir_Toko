@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Kasir_Toko.panel_informasi.form;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -30,36 +31,49 @@ namespace Kasir_Toko.panel_informasi
         public static void Addkasir(kasir std)
         {
             string sql = "INSERT INTO transaksi VALUES (Null, @barang_id, Null, @barang_nama, @barang_total)";
+            string sql2 = "UPDATE barang SET stok_barang = stok_barang - @barang_total_update WHERE barang_id = @barang_id_update";
+
             MySqlConnection conn = GetConnection();
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.Add("@barang_id", MySqlDbType.VarChar).Value = std.barang_id;
             cmd.Parameters.Add("@barang_nama", MySqlDbType.VarChar).Value = std.barang_nama;
-            cmd.Parameters.Add("@barang_total", MySqlDbType.VarChar).Value = std.barang_total;
+            cmd.Parameters.Add("@barang_total", MySqlDbType.Int64).Value = std.barang_total;
+            MySqlCommand cmd2 = new MySqlCommand(sql2, conn);
+            cmd2.Parameters.Add("@barang_total_update", MySqlDbType.Int64).Value = std.barang_total;
+            cmd2.Parameters.Add("@barang_id_update", MySqlDbType.VarChar).Value = std.barang_id;
             try
             {
                 cmd.ExecuteNonQuery();
+                cmd2.ExecuteNonQuery();
                 MessageBox.Show("Berhasil Menambah Data", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch(MySqlException ex)
+            catch (MySqlException ex)
             {
                 MessageBox.Show("kasir tidak Dimasukkan \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             conn.Close();
         }
-        public static void Updatekasir(kasir std,string id)
+        public static void Updatekasir(kasir std,string id, string total_box)
         {
             string sql = "UPDATE transaksi SET barang_id=@barang_id, total_transaksi_id=null, barang_nama=@barang_nama, barang_total=@barang_total WHERE transaksi_id=@transaksi_id";
+            string sql2 = "UPDATE barang SET stok_barang = stok_barang + @barang_total_box - @barang_total_update WHERE barang_id = @barang_id_update";
+
             MySqlConnection conn = GetConnection();
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.Add("@transaksi_id", MySqlDbType.VarChar).Value = id;
             cmd.Parameters.Add("@barang_id", MySqlDbType.VarChar).Value = std.barang_id;
             cmd.Parameters.Add("@barang_nama", MySqlDbType.VarChar).Value = std.barang_nama;
-            cmd.Parameters.Add("@barang_total", MySqlDbType.VarChar).Value = std.barang_total;
+            cmd.Parameters.Add("@barang_total", MySqlDbType.Int64).Value = std.barang_total;
+            MySqlCommand cmd2 = new MySqlCommand(sql2, conn);
+            cmd2.Parameters.Add("@barang_total_update", MySqlDbType.Int64).Value = std.barang_total;
+            cmd2.Parameters.Add("@barang_id_update", MySqlDbType.VarChar).Value = std.barang_id;
+            cmd2.Parameters.Add("@barang_total_box", MySqlDbType.VarChar).Value = total_box;
             try
             {
                 cmd.ExecuteNonQuery();
+                cmd2.ExecuteNonQuery();
                 MessageBox.Show("Berhasil Update Data", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (MySqlException ex)
@@ -68,16 +82,22 @@ namespace Kasir_Toko.panel_informasi
             }
             conn.Close();
         }
-        public static void Deletekasir(string id)
+        public static void Deletekasir(string id, string id_barang, string total)
         {
             string sql = "DELETE FROM transaksi WHERE transaksi_id = @transaksi_id";
+            string sql2 = "UPDATE barang SET stok_barang = stok_barang +@barang_total_update WHERE barang_id = @barang_id_update";
+
             MySqlConnection conn = GetConnection();
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             cmd.CommandType = CommandType.Text;
             cmd.Parameters.Add("@transaksi_id", MySqlDbType.VarChar).Value = id;
+            MySqlCommand cmd2 = new MySqlCommand(sql2, conn);
+            cmd2.Parameters.Add("@barang_total_update", MySqlDbType.Int64).Value = total;
+            cmd2.Parameters.Add("@barang_id_update", MySqlDbType.VarChar).Value = id_barang;
             try
             {
                 cmd.ExecuteNonQuery();
+                cmd2.ExecuteNonQuery();
                 MessageBox.Show("Berhasil menghapus data", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (MySqlException ex)

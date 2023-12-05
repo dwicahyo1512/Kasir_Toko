@@ -29,11 +29,11 @@ namespace Kasir_Toko.panel_informasi.form
         public void UpdateInfo()
         {
             btnsave.Text = "Update";
-            comboBox1.Text = barang;
+            comboBox1.SelectedItem = barang;
             textBox1.Text = total_barang;
+            autoFill();
         }
-
-        private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
+        public void autoFill()
         {
             if (comboBox1.SelectedItem != null)
             {
@@ -44,20 +44,50 @@ namespace Kasir_Toko.panel_informasi.form
                 string nama_barang = selectedDataRow.Row["barang_nama"].ToString();
                 string harga_barang = selectedDataRow.Row["harga_barang"].ToString();
                 // Mengatur nilai TextBox berdasarkan pilihan ComboBox
-                textBox1.Text = stok_barang;
                 Stok_tersedia.Text = stok_barang;
                 textBox_satuan.Text = satuan;
                 textBox_kategori.Text = kategori;
                 textBoxnama_barang.Text = nama_barang;
                 textBoxharga_barang.Text = harga_barang;
-
             }
+        }
+        private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            autoFill();
+        }
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            autoFill();
         }
         private void btnsave_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text.Trim().Length == 0)
+            if (string.IsNullOrWhiteSpace(textBox1.Text) ||
+           (int.TryParse(textBox1.Text, out int nilai) && nilai == 0))
             {
-                MessageBox.Show("stok Barang tidak boleh kosong");
+                MessageBox.Show("stok Barang tidak boleh kosong atau Nilainya 0");
+                return;
+            }
+            int nilaiTextBox;
+            if (int.TryParse(textBox1.Text, out nilaiTextBox))
+            {
+                if (comboBox1.SelectedItem != null)
+                {
+                    DataRowView selectedDataRow = comboBox1.SelectedItem as DataRowView;
+                    if (selectedDataRow != null && selectedDataRow.Row != null)
+                    {
+                        // Pastikan untuk mengakses properti Row sebelum mengambil nilai "stok_barang"
+                        int stokBarangDariDatabase = Convert.ToInt32(selectedDataRow.Row["stok_barang"]);
+                        if (stokBarangDariDatabase < nilaiTextBox)
+                        {
+                            MessageBox.Show("Stok barang tidak Boleh Melebihi total stok barang.");
+                            return;
+                        }
+                    }
+                }
+            }
+            if (comboBox1.SelectedItem == null)
+            {
+                MessageBox.Show("Barang Tidak Boleh Kosong(Harap memilih Barang)");
                 return;
             }
             if (btnsave.Text == "Save")
@@ -77,6 +107,8 @@ namespace Kasir_Toko.panel_informasi.form
                     kasir std = new kasir(barangID, comboBox1.Text.Trim(), stokBarang);
                     DbKasir.Addkasir(std);
                     Clear();
+                    DbKasir.LoadComboBox("SELECT * FROM barang", "barang", "barang_id", "barang_nama", comboBox1);
+                    comboBox1.Text = barang;
                 }
             }
             if (btnsave.Text == "Update")
@@ -94,14 +126,15 @@ namespace Kasir_Toko.panel_informasi.form
                     }
 
                     kasir std = new kasir(barangID, comboBox1.Text.Trim(), stokBarang);
-                    DbKasir.Updatekasir(std, id);
+                   
+                    DbKasir.Updatekasir(std, id, total_barang);
 
                 }
             }
             _parent.Display();
         }
 
-       
+      
 
         public void SaveInfo()
         {
@@ -109,7 +142,7 @@ namespace Kasir_Toko.panel_informasi.form
         }
         public void Clear()
         {
-            comboBox1.Text = textBox1.Text = string.Empty;
+            comboBox1.Text = textBox1.Text = textBox_satuan.Text = textBox_kategori.Text = textBoxnama_barang.Text = textBoxharga_barang.Text = Stok_tersedia.Text = string.Empty;
         }
     }
 }

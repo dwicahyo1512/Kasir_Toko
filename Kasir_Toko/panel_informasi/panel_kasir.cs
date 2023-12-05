@@ -94,7 +94,7 @@ namespace Kasir_Toko.panel_informasi
                 //delete
                 if (MessageBox.Show("apakah kamu yakin mau menghapus data ini?", "information", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
-                    DbKasir.Deletekasir(dataGridView.Rows[e.RowIndex].Cells[2].Value.ToString());
+                    DbKasir.Deletekasir(dataGridView.Rows[e.RowIndex].Cells[2].Value.ToString(), dataGridView.Rows[e.RowIndex].Cells[3].Value.ToString(), dataGridView.Rows[e.RowIndex].Cells[8].Value.ToString());
                     Display();
                 }
                 return;

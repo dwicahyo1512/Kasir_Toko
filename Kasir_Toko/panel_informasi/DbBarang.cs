@@ -86,9 +86,10 @@ namespace Kasir_Toko.panel_informasi
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Berhasil menghapus data", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch (MySqlException ex)
+            catch (MySqlException)
             {
-                MessageBox.Show("Gagal menghapus data! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Gagal menghapus data! \n Ada Data Yang Masih Tersimpan Di history Transaksi", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("Gagal menghapus data! \n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             conn.Close();
         }
